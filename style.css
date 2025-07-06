@@ -1,0 +1,287 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100vh;
+  font-size: 14px;
+}
+
+/* Header */
+.head {
+  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navigation */
+.nav ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.nav ul a {
+  display: inline-block;
+  color: aliceblue;
+  background-color: #074a4e;
+  padding: 1rem;
+  margin: 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.nav ul a:hover {
+  color: #074a4e;
+  background-color: #d7d2cc;
+  transform: scale(1.1);
+}
+
+/* Buttons */
+button {
+  width: 160px;
+  height: 37px;
+  color: #fdf6f6;
+  background-color: #133b4e;
+  padding: 0.6rem;
+  margin: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Home Section */
+.home {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.8rem;
+  width: 100%;
+  height: 91.6vh;
+  background-image: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
+  overflow: hidden;
+  margin: 0;
+}
+
+/* Album */
+.albume,
+.albume2 {
+  width: 260px;
+  height: 97%;
+  background-color: #d9d9d9;
+  margin-left: 30px;
+}
+
+.albume2 {
+  width: 270px;
+  position: relative;
+  right: 30px;
+}
+
+.albume video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.albume2 img {
+  height: 260px;
+  padding: 0.8rem;
+  border-radius: 30px;
+  transition: all 0.4s;
+}
+
+.albume2 .jpg2 {
+  height: 260px;
+  margin-left: 22px;
+  border-radius: 50px;
+}
+
+.albume2 img:hover {
+  transform: scale(1.1);
+}
+
+/* Logo */
+.logo {
+  width: 600px;
+  height: 500px;
+  margin-left: 150px;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Product Section */
+.Product {
+  opacity: 1;
+  text-transform: capitalize;
+  width: 1050px;
+  height: 400px;
+  background: #ffffff;
+  position: absolute;
+  top: 500px;
+  left: 430px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Product img {
+  height: 75%;
+  padding: 0.8rem;
+}
+
+/* Card Text */
+.card h1 {
+  text-align: center;
+  color: #000;
+}
+
+.card h4,
+.card h5 {
+  display: flex;
+  margin-left: 30px;
+  color: #000;
+}
+
+.card h4 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.card h5 {
+  margin-top: 10px;
+  color: rgb(42, 44, 43);
+}
+
+.card h2 {
+  display: flex;
+  margin-top: -10px;
+  margin-left: 180px;
+  color: #000;
+}
+
+.card img:hover{ 
+  transform: scale(1.04);
+  transition: all 0.4s;
+
+
+}
+
+/* Text Overlay */
+.text {
+  color: #fdf6f6;
+  overflow: hidden;
+  text-transform: capitalize;
+  display: block;
+  position: absolute;
+  left: 500px;
+  top: 170px;
+  width: 1000px;
+  height: 400px;
+}
+
+.text h1 {
+  padding-top: 5rem;
+}
+
+.text p {
+  font-size: 18px;
+  padding-top: 1rem;
+}
+
+.shopnow {
+  padding: 0.8rem;
+}
+
+/* Page 1 Section */
+.page1 {
+  width: 100%;
+  height: 100vh;
+}
+
+/* Publicte Section */
+.publicte {
+  background-image: url("page1/pub.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000000;
+  width: 100%;
+  height: 55vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.text1 {
+  position: absolute;
+  left: 100px;
+  width: 700px;
+  color: #ffffff;
+  display: block;
+}
+
+.text1 h1 {
+  font-size: 82px;
+}
+
+.text1 h3 {
+  font-size: 18px;
+}
+
+.buynow {
+  position: absolute;
+  right: 600px;
+  top: 250px;
+  width: 100px;
+  height: 40px;
+  color: #ffffff;
+  background: #ff0000;
+  display: block;
+  padding: 0.7rem 0.9rem 0.9rem 0.9rem;
+}
+
+/* Publicte2 Section */
+.publicte2 {
+  overflow: hidden;
+  height: 50vh;
+  width: 100%;
+  position: absolute;
+  top: 1400px;
+  background-color: #000000;
+}
+
+.video video {
+  border-radius: 140px;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>shop</title>
+  <meta name="description" content="best free cours online .....">
+  <meta name="keywords" content="css, php,java script, root,">
+  <link rel="icon" href="logo/nike.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+
+  <div class="head1">
+    <nav class="nav1">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-box"></i> Product</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+      </ul>
+      <div class="iconCart">
+        <img src="shopping-bag.png" alt="Cart">
+        <span class="totalQuantity">0</span>
+      </div>
+    </nav>
+
+    <div class="cartshop">
+      <h2>CART</h2>
+      <div class="listCart"></div>
+      <div class="buttons">
+        <div class="close">CLOSE</div>
+        <div class="checkout"><a href="checkout.html">CHECKOUT</a></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="shop">
+    <div class="navshop">
+      <h1>Best Shoes</h1>
+      <div class="menulist">
+        <button class="dropdown-togg" onclick="ToggleEvent()">Nouveautés</button>
+        <button class="dropdown-togg" onclick="ToggleEvent()">Femme</button>
+        <button class="dropdown-togg" onclick="ToggleEvent()">Homme</button>
+
+        <div class="dropdown" id="dropdownMenu">
+          <h2>Choix</h2>
+          <label><input type="checkbox"> Nike</label>
+          <label><input type="checkbox"> Adidas</label>
+          <label><input type="checkbox"> Puma</label>
+        </div>
+      </div>
+      <button class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <input type="text">
+    </div>
+
+    <div class="container">
+      <div class="filters">
+        <label>Type:
+          <select id="typeFilter" onchange="filterProducts()">
+            <option value="all">All</option>
+            <option value="shoes">أحذية</option>
+            <option value="clothes">ملابس</option>
+          </select>
+        </label>
+        <label>Size:
+          <select id="sizeFilter" onchange="filterProducts()">
+            <option value="all">All</option>
+            <option value="38">38</option>
+            <option value="40">40</option>
+            <option value="42">42</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+          </select>
+        </label>
+      </div>
+
+      <hr>
+
+      <section class="shopcards">
+        <div class="container" id="productContainer"></div>
+      </section>
+    </div>
+  </section>
+
+<script>
+  const products = [
+    { id: 1, img: "shopproduct/5.png", title: "Nike Sport", sizes: ["38", "40", "42"], price: 300 },
+    { id: 2, img: "shopproduct/1.png", title: "Nike Air Force 1", sizes: ["38", "40", "42"], price: 300 },
+    { id: 3, img: "shopproduct/2.png", title: "Nike Air Jordan 1", sizes: ["38", "40", "42"], price: 300 }
+  ];
+
+  const container = document.getElementById("productContainer");
+
+  function renderProducts(list = products) {
+    container.innerHTML = "";
+    list.forEach(product => {
+      const sizeSpans = product.sizes.map(size => `<span>${size}</span>`).join("");
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="imgBx">
+          <img src="${product.img}" alt="${product.title}">
+        </div>
+        <div class="contentBx">
+          <h2>${product.title}</h2>
+          <div class="size"><h3>Size:</h3>${sizeSpans}</div>
+          <div class="color"><h3>Color:</h3><span></span><span></span><span></span></div>
+          <h1 style="color: white; margin-top:5px; font-size: 20px">${product.price} DA</h1>
+          <button class="add-to-cart" onclick="addToCart(${product.id})">إضافة إلى السلة 🛒</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function filterProducts() {
+    const type = document.getElementById("typeFilter").value;
+    const size = document.getElementById("sizeFilter").value;
+
+    const filtered = products.filter(p => {
+      const matchType = type === "all" || (type === "shoes" && p.sizes);
+      const matchSize = size === "all" || p.sizes.includes(size);
+      return matchType && matchSize;
+    });
+
+    renderProducts(filtered);
+  }
+
+  function ToggleEvent() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+
+  document.addEventListener("click", function (e) {
+    const toggleBtns = document.querySelectorAll(".dropdown-togg");
+    const menu = document.getElementById("dropdownMenu");
+    if (![...toggleBtns].some(btn => btn.contains(e.target)) && !menu.contains(e.target)) {
+      menu.style.display = "none";
+    }
+  });
+
+  const iconCart = document.querySelector(".iconCart");
+  const cart = document.querySelector(".cartshop");
+  const closeBtn = document.querySelector(".close");
+  const nav = document.querySelector(".nav1");
+
+  iconCart.addEventListener("click", () => {
+    cart.style.right = cart.style.right === "0px" ? "-100%" : "0";
+    nav.style.transform = cart.style.right === "0px" ? "translateX(-400px)" : "translateX(0)";
+  });
+
+  closeBtn.addEventListener("click", () => {
+    cart.style.right = "-100%";
+    nav.style.transform = "translateX(0)";
+  });
+
+  const cartItems = JSON.parse(localStorage.getItem("listCart")) || [];
+
+  function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    const existing = cartItems.find(item => item.id === id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cartItems.push({
+        id: product.id,
+        name: product.title,       // ← تعديل الاسم
+        image: product.img,        // ← تعديل الصورة
+        price: product.price,
+        quantity: 1
+      });
+    }
+    updateCartDisplay();
+    localStorage.setItem("listCart", JSON.stringify(cartItems));
+  }
+
+  function removeFromCart(id) {
+    const index = cartItems.findIndex(item => item.id === id);
+    if (index > -1) {
+      cartItems.splice(index, 1);
+    }
+    updateCartDisplay();
+    localStorage.setItem("listCart", JSON.stringify(cartItems));
+  }
+
+  function updateCartDisplay() {
+    const listCart = document.querySelector(".listCart");
+    const totalQty = document.querySelector(".totalQuantity");
+    listCart.innerHTML = "";
+
+    cartItems.forEach(item => {
+      listCart.innerHTML += `
+        <div class="item">
+          <img src="${item.image}" alt="${item.name}">
+          <div>
+            <h4>${item.name}</h4>
+            <p>${item.price} DA</p>
+            <p>Qty: ${item.quantity}</p>
+            <button onclick="removeFromCart(${item.id})" style="background:red;color:white;border:none;padding:2px 16px;margin-top:5px;cursor:pointer; margin-left:150px; font-size:16px;">🗑 Del</button>
+          </div>
+        </div>
+      `;
+    });
+
+    const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    totalQty.textContent = total;
+  }
+
+  // Initial Load
+  renderProducts();
+  updateCartDisplay();
+  function removeFromCart(id) {
+  const index = cartItems.findIndex(item => item.id === id);
+  if (index !== -1) {
+    if (cartItems[index].quantity > 1) {
+      cartItems[index].quantity -= 1; // إنقاص الكمية
+    } else {
+      cartItems.splice(index, 1); // حذف المنتج كليًا إذا كانت الكمية = 1
+    }
+    localStorage.setItem("listCart", JSON.stringify(cartItems));
+    updateCartDisplay();
+  }
+}
+
+</script>
+
+
+</body>
+</html>
+
